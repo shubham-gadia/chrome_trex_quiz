@@ -9,27 +9,27 @@ pygame.display.set_caption("Trex try1")
 #font
 font = pygame.font.Font("freesansbold.ttf", 20)
 #images
-background = pygame.image.load("trex_pics/background.png")
-dragon = pygame.image.load("trex_pics/dra1.png")
+background = pygame.image.load("images/background.png")
+dragon = pygame.image.load("images/dra1.png")
 dragon = pygame.transform.scale(dragon, (50,50))
-dragon2 = pygame.image.load("trex_pics/dra2.png")
+dragon2 = pygame.image.load("images/dra2.png")
 dragon2 = pygame.transform.scale(dragon2, (50,50))
-dragon3 = pygame.image.load("trex_pics/dra3.png")
+dragon3 = pygame.image.load("images/dra3.png")
 dragon3 = pygame.transform.scale(dragon3, (50,50))
-dragon4 = pygame.image.load("trex_pics/dra4.png")
+dragon4 = pygame.image.load("images/dra4.png")
 dragon4 = pygame.transform.scale(dragon4, (50,50))
-dragon5 = pygame.image.load("trex_pics/dra6.png")
+dragon5 = pygame.image.load("images/dra6.png")
 dragon5 = pygame.transform.scale(dragon5, (50,50))
 walk = [dragon, dragon, dragon, dragon, dragon2, dragon2, dragon2, dragon2, dragon3, dragon3, dragon3, dragon3, dragon4, dragon4, dragon4, dragon4]
-tree = pygame.image.load("trex_pics/tree.png")
+tree = pygame.image.load("images/tree.png")
 tree = pygame.transform.scale(tree, (70, 50))
-tree1 = pygame.image.load("trex_pics/tree1.png")
+tree1 = pygame.image.load("images/tree1.png")
 tree1 = pygame.transform.scale(tree1, (100, 60))
-tree2 = pygame.image.load("trex_pics/tree2.png")
+tree2 = pygame.image.load("images/tree2.png")
 tree2 = pygame.transform.scale(tree2, (90, 60))
-tree3 = pygame.image.load("trex_pics/tree3.png")
+tree3 = pygame.image.load("images/tree3.png")
 tree3 = pygame.transform.scale(tree3, (45, 60))
-tree4 = pygame.image.load("trex_pics/tree4.png")
+tree4 = pygame.image.load("images/tree4.png")
 tree4 = pygame.transform.scale(tree4, (70, 60))
 
 #comment by heeth
@@ -58,7 +58,6 @@ def gameloop():
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
-                sys.exit()
 
             if event.type == KEYDOWN:
                 if event.key == K_UP:
