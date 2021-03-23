@@ -32,6 +32,8 @@ tree3 = pygame.transform.scale(tree3, (45, 60))
 tree4 = pygame.image.load("trex_pics/tree4.png")
 tree4 = pygame.transform.scale(tree4, (70, 60))
 
+#comment by heeth
+
 def gameloop():
     #variables
     backx = 0
