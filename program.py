@@ -55,6 +55,7 @@ def gameloop():
     gravity = 7
     score = 0
     gameover = False
+    gameSpeed = 3
 
     while True:
 
@@ -70,7 +71,7 @@ def gameloop():
                 if event.key == K_UP:
                     if dragy == 275:
                         jump = True
-                        backvelo = 3
+                        backvelo = gameSpeed
                         game = True
                 if event.key == K_SPACE:
                     if gameover == True:
