@@ -353,21 +353,40 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="begin_end_button">
+           <widget class="QPushButton" name="begin_button">
             <property name="minimumSize">
              <size>
               <width>80</width>
-              <height>40</height>
+              <height>27</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>80</width>
-              <height>40</height>
+              <height>27</height>
              </size>
             </property>
             <property name="text">
-             <string>Begin/End</string>
+             <string>Begin Game</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="end_button">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>End Game</string>
             </property>
            </widget>
           </item>
@@ -376,13 +395,13 @@
             <property name="minimumSize">
              <size>
               <width>80</width>
-              <height>40</height>
+              <height>26</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>80</width>
-              <height>40</height>
+              <height>26</height>
              </size>
             </property>
             <property name="text">
