@@ -1,0 +1,46 @@
+Sr No.,Question,Option A,Option B,Option C,Option D,Answer
+1,Which one of the following is not shared by threads?,program counter,stack,both program counter and stack,none of the mentioned,c
+2,A process can be ___________,single threaded,multithreaded,both single threaded and multithreaded,none of the mentioned,c
+3,If one thread opens a file with read privileges then ___________,other threads in the another process can also read from that file,other threads in the same process can also read from that file,any other thread can not read from that file,all of the mentioned,b
+4,The time required to create a new thread in an existing process is ___________,greater than the time required to create a new process,less than the time required to create a new process,equal to the time required to create a new process,none of the mentioned,b
+5,When the event for which a thread is blocked occurs?,thread moves to the ready queue,thread remains blocked,thread completes,a new thread is provided,a
+6,Which one of the following is not a valid state of a thread?,running,parsing,ready,blocked,b
+7,The register context and stacks of a thread are deallocated when the thread?,terminates,blocks,unblocks,spawns,a
+8,Thread synchronization is required because ___________,all threads of a process share the same address space,all threads of a process share the same global variables,all threads of a process can share the same files,all of the mentioned,d
+9,A thread is also called ?,heavyweight process,lightweight process,data segement process,overhead process,b
+10,In how many ways Threads are implemented?,two,three,four ,five,a
+11,"In distributed system, each processor has its own ___________",local memory,clock,both local memory and clock,none of the mentioned ,c
+12,If one site fails in distributed system then ___________,the remaining sites can continue operating,all the sites will stop working,directly connected sites will stop working,none of the mentioned ,a
+13,Network operating system runs on ___________,server,every system in the network,both server and every system in the network,none of the mentioned ,a
+14,Logical extension of computation migration is ___________,process migration,system migration,thread migration ,data migration,a
+15,"In distributed systems, link and site failure is detected by ___________",polling,handshaking,token passing,none of the mentioned,b
+16,Internet provides _______ for remote login.,telnet,http,ftp,rpc,a
+17,The initial program that is run when the computer is powered up is called __________,boot program,bootloader,initializer,bootstrap program,d
+18,What is a trap/exception?,hardware generated interrupt caused by an error,software generated interrupt caused by an error,user generated interrupt caused by an error,none of the mentioned,b
+19,In a programmed input/output(PIO) __________,"the CPU uses polling to watch the control bit constantly, looping to see if a device is ready",) the CPU writes one data byte to the data register and sets a bit in control register to show that a byte is available,the CPU receives an interrupt when the device is ready for the next byte,the CPU runs a user written code and does accordingly,a
+20,How does the Hardware trigger an interrupt?,Sending signals to CPU through a system bus,) Executing a special program called interrupt program,Executing a special program called system program,Executing a special operation called system call,a
+21,What is not true about a distributed system?,It is a collection of processor,All processors are synchronized,They do not share memory,none of the mentioned,b
+22,What are the characteristics of processor in distributed system?,They vary in size and function,They are same in size and function,They are manufactured with single purpose,They are real-time devices,a
+23,What is not a major reason for building distributed systems?,resource sharing,computation speedup,reliability,simplicity,d
+24,What are the types of distributed operating system?,Network Operating system,Zone based Operating system,Level based Operating system,all of the mentioned,a
+25,What are characteristic of Network Operating Systems?,Users are aware of multiplicity of machines,They are transparent,They are simple to use,all of the mentioned,a
+26,How is access to resources of various machines is done?,Remote logging using ssh or telnet,Zone are configured for automatic access,FTP is not used,all of the mentioned,a
+27,What are the characteristics of data migration?,transfer data by entire file or immediate portion required,transfer the computation rather than the data,execute an entire process or parts of it at different sites,none of the mentioned,a
+28,What are routing strategies which is not used in distributed systems?,Fixed routing,Token routing,Virtual routing,Dynamic routing,c
+29,Which layer is the layer closest to the transmission medium?,Physical,Data Link,Network,Transport,a
+30,What are the different ways distributed may suffer?,failure of a link,failure of a site,loss of message,all of the mentioned,d
+31,"A process is already split into pieces, called________________.",Tasks ,Program,Processors,Routines,a
+32,What are characteristics of process migration ?,transfer data by entire file or immediate portion required,) transfer the computation rather than the data,execute an entire process or parts of it at different sites,none of the mentioned,c
+33,What are examples of state information ?,opened files and their clients,file descriptors and file handles,current file position pointers,all of the mentioned,d
+34,What are the characteristics of stateless server ?,Easier to implement,They are not fault-tolerant upon client or server failures,,They are redundant to keep data safe,a
+35,"In distributed systems, a logical clock is associated with ______________",each instruction,each process,each register,none of the mentioned,b
+36,What is a stateless file server?,It keeps tracks of states of different objects,It maintains internally no state information at all,It maintains some information in them,none of the mentioned,b
+37,In ____________ location policies a random node is polled to check its state and the task is transferred if it will not be overloaded; polling is continued until a suitable node is found.,Threshold,Shortest,Bidding,Pairing,a
+38,Which of the following network resources can be load balanced?,Connections through intelligent switches,DNS,Storage resources,all of the mentioned,d
+39,The technology used to distribute service requests to resources is referred to as:,Load performing ,Load scheduling,Load balancing,all of the mentioned,c
+40,The technology used to distribute service requests to resources is referred to as:,Load performing ,Load scheduling,Load balancing,all of the mentioned,c
+41,________________ is the relocation of a process from its current location to another node.,Process migration,Load balancing,RPC,none of the mentioned,c
+42,Process Migration involves _________,Selection of a process to be migrated,Selection of destination system or node,Actual transfer of the selected process to the destination system or node,"All A, B and C",d
+43,____________________ is helpful when the faults are transient or intermittent.,Physical redundancyTime redundancy,,Information redundancy,none of the mentioned,a
+44,"In __________________, Extra equipment's are added to enable the system to tolerate faults due to loss or malfunction of some components.",Time redundancy,Physical redundancy,Information redundancy,none of the mentioned,b
+45,What type of fault remains in the system for some period and then disappears?,Transient,Intermittent,Permanent,none of the mentioned,d

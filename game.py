@@ -2,9 +2,10 @@ import os
 import sys
 import pygame
 import random
+import csv
 from datetime import datetime
 from pygame import *
-from PyQt5 import QtWidgets, QtGui, uic
+from PyQt5 import QtWidgets, QtGui, QtCore, uic
 from PyQt5.QtGui import QImage, QPixmap
 
 import sys
@@ -274,12 +275,16 @@ class Scoreboard():
 '''
 
 def jump(dino):
+    dino.isJumping = True
+    if pygame.mixer.get_init() != None:
+        jump_sound.play()
     dino.movement[1] = -1*dino.jumpSpeed
 
 
 def introscreen():
     temp_dino = Dino(44,47)
     temp_dino.isBlinking = True
+    
     gameStart = False
 
     temp_ground,temp_ground_rect = load_sprite_sheet('ground.png',15,1,-1,-1,-1)
@@ -300,7 +305,6 @@ def introscreen():
                     return True
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
-                        temp_dino.isJumping = True
                         temp_dino.isBlinking = False
                         # jump event
                         jump(temp_dino)
@@ -326,10 +330,12 @@ def gameplay():
     timer = 16 
     global high_score
     global gsl
+    global act
     gamespeed = 4
     startMenu = False
     gameOver = False
     gameQuit = False
+    global playerDino
     playerDino = Dino(44,47)
     new_ground = Ground(-1*gamespeed)
     #scb = Scoreboard()
@@ -369,17 +375,13 @@ def gameplay():
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
                             gameQuit = True
-                            gameOver = True
-
-                            
+                            gameOver = True                        
 
                         # jump event
                         if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_SPACE:
                                 if playerDino.rect.bottom == int(0.98*height):
-                                    playerDino.isJumping = True
-                                    if pygame.mixer.get_init() != None:
-                                        jump_sound.play()
+                                    
                                     jump(playerDino)
 
                             if event.key == pygame.K_DOWN:
@@ -504,6 +506,7 @@ class Ui(QtWidgets.QMainWindow):
         self.show() # Show the GUI
         self.begin_button.clicked.connect(self.begin_button_pressed)
         self.end_button.clicked.connect(self.end_button_pressed)
+        self.questions()
 
     def get_game_screen_label(self):
         return self.game_screen_label
@@ -512,11 +515,22 @@ class Ui(QtWidgets.QMainWindow):
         
     def begin_button_pressed(self):
         game_running = True
+        self.game_screen_label.setFocus()
         main()
 
     def end_button_pressed(self):
         end()
 
+    def questions(self):
+        #TODO: Import objective.csv file and then do the final part completion
+
+    '''def keyPressEvent(self,event):
+        key=event.key()
+        if key==QtCore.Qt.Key_Up or (event.type()==QtCore.QEvent.KeyPress and key==QtCore.Qt.Key_Space):
+            print('space pressed')
+            jump(playerDino)'''
+
+    
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
