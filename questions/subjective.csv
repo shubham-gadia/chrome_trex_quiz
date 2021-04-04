@@ -1,0 +1,12 @@
+1,Define distributed systems?,distributed computing multiple components different machines communicate and coordinate single system,computers physical servers virtual machines containers any other,,,,,
+2,What are the benefits of distributed systems?,horizontal scalabitity inexpensive nodes ,reliability distributed systems fault-tolerant ,disruption single machine fails,performance distributed system efficient broken multiple machinnes,,,
+3,What are the challenges of distributed systems?,scheduling run ,limitations underutilized hardware unpredictable runtimes,latency communications ,tradeoffs availability consistency latency,observability gathering processing presenting monitoring hardware metrics large clusters ,,
+4,Types of distributed systems,client-server server format display end-uder,commit server permanent,three tier stored middle tier simplify application deployment,architecture model common web applications,n tier application server forward requests additional enterprise service network,peer to peer manage resources,uniformly distributed peers serve either client server
+5,Example of a Distributed System,endless cases electronic banking systems massive multiplayer sensor networks,stackpath large distributed system content delivery network service,points of presence pops worldwide distributed system,content delivery stores frequently requested edge locations ,,,
+6,Why do we use threads?,single application many things less waiting,faster create destroy separate address space,overlap i/o without thread ,example,,,
+7,How to schedule user-level threads (ULTs)?,kernel process run next,run time system schedules ,process quantum,example,example,,
+8,How to schedule kernel-level threads (KLTs)?,no restrictions ordering,more difficult priorities,example,,,,
+9,What are the advantages of using ULTs?,thread switching kernel mode switching fast context switch time,semantics defined application,application specific best algorithm selected,highly portable thread library ,,,
+10,What are the disadvantages of using ULTs?,system calls blocking processes within implicitly waste resource decreased performance,kernel assign processors ,two threads within same simultaneouly two processors,,,,
+11,What are the advantages of using KLTs?,kernel schedule multiple same process processors,blocking thread level ,cpu assigned anothr thread same ,routines multithreaded,,,
+12,What are the disadvantages of using KLTs?,thread switching involves kernel,two mode switch required,ktl switching slower compared utl full process switch,,,,

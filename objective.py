@@ -530,8 +530,6 @@ class Ui(QtWidgets.QMainWindow):
             print('space pressed')
             jump(playerDino)'''
 
-    
-
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
 gsl = window.get_game_screen_label()
