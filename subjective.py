@@ -1,6 +1,7 @@
 import csv
 import sys
 import re
+import os
 import datetime
 from PyQt5 import QtWidgets, QtGui, QtCore, uic
 from PyQt5.QtGui import QImage, QPixmap
@@ -56,7 +57,12 @@ class Ui(QtWidgets.QMainWindow):
         self.next_ques_button.clicked.connect(self.next_button_pressed)
         self.submit_button.clicked.connect(self.submit_button_pressed)
         self.previous_ques_button.clicked.connect(self.previous_button_pressed)
-        
+        self.home_button.clicked.connect(self.home_button_pressed)
+
+    def home_button_pressed(self):
+        os.system('python main.py')
+        sys.exit()
+
     def showTime(self):
 
         if self.test_ongoing:
