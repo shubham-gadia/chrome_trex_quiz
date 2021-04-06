@@ -3,17 +3,16 @@ import sys
 import pygame
 import random
 import csv
-from datetime import datetime
+import datetime
 from pygame import *
 from PyQt5 import QtWidgets, QtGui, QtCore, uic
 from PyQt5.QtGui import QImage, QPixmap
-
-import sys
+from PyQt5.QtCore import QTimer, QTime
 
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
-#os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (-1000,-1000)
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (-500, -500)
 
 scr_size = (width,height) = (700,400)
 FPS = 60
@@ -325,9 +324,8 @@ def introscreen():
             gameStart = True
 
 def gameplay():
-    start = datetime.now()
+    start = datetime.datetime.now()
     count = 0
-    timer = 16 
     global high_score
     global gsl
     global act
@@ -404,17 +402,17 @@ def gameplay():
 
             if len(cacti) < 2:
 
-                end = datetime.now()
+                end = datetime.datetime.now()
                 time = end - start
                 sec = float(str(time).split(':')[2])
                 if len(cacti) == 0:
                     if count == 1 and sec >= timer:
-                        start = datetime.now()
+                        start = datetime.datetime.now()
                         last_obstacle.empty()
                         last_obstacle.add(Cactus(gamespeed,40,40))
-                    elif count == 0 and sec >= timer - 3.5:
+                    elif count == 0 and sec >= timer - 3:
                         count = 1
-                        start = datetime.now()
+                        start = datetime.datetime.now()
                         last_obstacle.empty()
                         last_obstacle.add(Cactus(gamespeed,40,40))
                 else:
@@ -493,42 +491,199 @@ def gameplay():
             clock.tick(FPS)
     
 def end():
-    pygame.quit()
-
-def main():
-    gameplay()
+    pass
 
 class Ui(QtWidgets.QMainWindow):
 
     def __init__(self):
+
         super(Ui, self).__init__() # Call the inherited classes __init__ method
         uic.loadUi('ui/obj.ui', self) # Load the .ui file
         self.show() # Show the GUI
+        global timer
+        timer = 16
+        self.time_per_question = timer
+        self.test_ongoing = True
+
         self.begin_button.clicked.connect(self.begin_button_pressed)
         self.end_button.clicked.connect(self.end_button_pressed)
+        self.option_a.clicked.connect(self.option_a_pressed)
+        self.option_b.clicked.connect(self.option_b_pressed)
+        self.option_c.clicked.connect(self.option_c_pressed)
+        self.option_d.clicked.connect(self.option_d_pressed)
+        self.home_button.clicked.connect(self.home_button_pressed)
+
         self.questions()
+
+
+    def home_button_pressed(self):
+        os.system('python main.py')
+        sys.exit()
+
+    def clear_option_bg_color(self):
+        self.option_a.setStyleSheet("background-color: #ffffff")
+        self.option_b.setStyleSheet("background-color: #ffffff")
+        self.option_c.setStyleSheet("background-color: #ffffff")
+        self.option_d.setStyleSheet("background-color: #ffffff")
+
+    def option_a_pressed(self):
+        self.clear_option_bg_color()
+        self.option_a.setStyleSheet("background-color: #dddddd")
+        self.ans_selected = 'a'
+
+    def option_b_pressed(self):
+        self.clear_option_bg_color()
+        self.option_b.setStyleSheet("background-color: #dddddd")
+        self.ans_selected = 'b'
+
+    def option_c_pressed(self):
+        self.clear_option_bg_color()
+        self.option_c.setStyleSheet("background-color: #dddddd")
+        self.ans_selected = 'c'
+
+    def option_d_pressed(self):
+        self.clear_option_bg_color()
+        self.option_d.setStyleSheet("background-color: #dddddd")
+        self.ans_selected = 'd'
 
     def get_game_screen_label(self):
         return self.game_screen_label
 
     #setPixmap(pixmap)
         
+    def showTime(self):
+
+        if self.test_ongoing:
+            # add 1 second to current time
+            self.curr_time = self.curr_time.addSecs(1)
+            # get seconds passed
+            self.current_seconds = QTime(0, 0, 0).secsTo(self.curr_time)
+            # get seconds left (subtracting from total time)
+            self.seconds_left = self.time_per_question - self.current_seconds
+
+            # convert seconds left to time
+            if self.seconds_left > 1:
+                self.time_left = datetime.timedelta(seconds=(self.seconds_left - 1))
+                # finally update time left in label
+                self.time_left_label.setText("Time Left" + '\n' + str(self.time_left)[5:7] + ' s')
+
+            else:
+                self.time_left_label.setText('Time Left\n00 s')
+                self.option_a.setEnabled(False)
+                self.option_b.setEnabled(False)
+                self.option_c.setEnabled(False)
+                self.option_d.setEnabled(False)
+                if not self.evaluated:
+                    if self.ans_selected == self.questions[self.ques_no]['ans']:
+                        jump(playerDino)
+                        self.correct += 1
+                        self.score += 4
+                        self.evaluated = True
+                    else:
+                        self.incorrect += 1
+                        self.score -= 1
+                        self.evaluated = True
+
+            if self.seconds_left < 1:
+                self.update_question()
+                gameplay()
+                
+
+        #else:
+            #self.submit_button_pressed()
+    
+    def update_question(self):
+        self.ques_no += 1
+        self.ans_selected = 'e'
+        self.clear_option_bg_color()
+        self.evaluated = False
+
+        self.option_a.setEnabled(True)
+        self.option_b.setEnabled(True)
+        self.option_c.setEnabled(True)
+        self.option_d.setEnabled(True)
+
+        self.correct_label.setText('Correct: ' + str(self.correct))
+        self.incorrect_label.setText('Incorrect: ' + str(self.incorrect))
+        self.score_label.setText('Score: ' + str(self.score))
+        self.ques_no_label.setText('Ques No: ' + str(self.ques_no))
+        self.question_label.setText(self.questions[self.ques_no]['ques'])
+        self.option_a.setText(self.questions[self.ques_no]['a']) 
+        self.option_b.setText(self.questions[self.ques_no]['b'])
+        self.option_c.setText(self.questions[self.ques_no]['c'])
+        self.option_d.setText(self.questions[self.ques_no]['d'])
+
+        # calculate total seconds alloted for the test
+        self.time_left_label.setText("Time Left" + '\n' + str(datetime.timedelta(seconds=self.time_per_question - 1))[5:7] + ' s')
+        # set current time as 0 i.e when test will start
+        self.curr_time = QtCore.QTime(00,00,00)
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.showTime)
+        self.timer.start(1000)
+
+        pass
+
     def begin_button_pressed(self):
+
         game_running = True
         self.game_screen_label.setFocus()
-        main()
+        
+        self.option_a.setEnabled(True)
+        self.option_b.setEnabled(True)
+        self.option_c.setEnabled(True)
+        self.option_d.setEnabled(True)
+
+        self.correct = 0
+        self.incorrect = 0
+        self.score = 0
+        self.ques_no = 0
+
+        self.update_question()
+        gameplay()
+
 
     def end_button_pressed(self):
+
+        timer = 100000000
+        self.test_ongoing = False
+
+        self.correct_label.setText('')
+        self.incorrect_label.setText('')
+        self.score_label.setText('')
+        self.ques_no_label.setText('')
+        self.question_label.setText('')
+        self.time_left_label.setText('')
+
+        self.option_a.setText('')
+        self.option_b.setText('')
+        self.option_c.setText('')
+        self.option_d.setText('')
+
+        self.option_a.setEnabled(False)
+        self.option_b.setEnabled(False)
+        self.option_c.setEnabled(False)
+        self.option_d.setEnabled(False)
+
+        timer = 5
+        self.game_screen_label.setFocus()
         end()
 
     def questions(self):
+        self.questions = {}
+        with open('questions/objective.csv', 'r') as file:
+            reader = csv.reader(file)
+            i = 1
+            for row in reader:
+                self.questions[i] = {'ques': row[1], 'a': row[2], 'b': row[3], 'c': row[4], 'd': row[5], 'ans': row[6]}
+                i += 1
+        pass
         #TODO: Import objective.csv file and then do the final part completion
 
-    '''def keyPressEvent(self,event):
+    def keyPressEvent(self,event):
         key=event.key()
-        if key==QtCore.Qt.Key_Up or (event.type()==QtCore.QEvent.KeyPress and key==QtCore.Qt.Key_Space):
+        if key==QtCore.Qt.Key_Up or (event.type()==QtCore.QEvent.KeyPress and key==QtCore.Qt.Key_Space) and not self.test_ongoing:
             print('space pressed')
-            jump(playerDino)'''
+            jump(playerDino)
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
