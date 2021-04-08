@@ -19,13 +19,47 @@ class Question():
         self.question = question
         self.keywords = keywords
         self.answer = ""
+        self.flag = True
+
+    def search(pattern, text, q):
+        m = len(pattern)
+        n = len(text)
+        p = 0
+        t = 0
+        h = 1
+        i = 0
+        j = 0
+
+        for i in range(m-1):
+            h = (h*d) % q
+
+        for i in range(m):
+            p = (d*p + ord(pattern[i])) % q
+            t = (d*t + ord(text[i])) % q
+
+        for i in range(n-m+1):
+            if p == t:
+                for j in range(m):
+                    if text[i+j] != pattern[j]:
+                        break
+                j += 1
+                if j == m:
+                    #print("position: " + str(i+1))
+                    pass
+            if i < n-m:
+                t = (d*(t-ord(text[i])*h) + ord(text[i+m])) % q
+                if t < 0:
+                    t = t+q
 
     def get_match_percentage(self, ans_bullets):
+        self.flag = not self.flag
         final_percentage = []
         intersections = []
         for ans_bullet in ans_bullets:
             for keyword in self.keywords:
                 keyword_set = frozenset(keyword)
+                if keyword != None and self.flag:
+                    search(keyword, ans_bullet)
                 intersection = [x for x in ans_bullet if x in keyword_set]
                 if len(intersection) > 0:
                     intersection_percentage = len(intersection) / len(keyword_set) * 100
