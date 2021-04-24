@@ -8,5 +8,3 @@
 8,How to schedule kernel-level threads (KLTs)?,no restrictions ordering,more difficult priorities,example,,,,
 9,What are the advantages of using ULTs?,thread switching kernel mode switching fast context switch time,semantics defined application,application specific best algorithm selected,highly portable thread library ,,,
 10,What are the disadvantages of using ULTs?,system calls blocking processes within implicitly waste resource decreased performance,kernel assign processors ,two threads within same simultaneouly two processors,,,,
-11,What are the advantages of using KLTs?,kernel schedule multiple same process processors,blocking thread level ,cpu assigned anothr thread same ,routines multithreaded,,,
-12,What are the disadvantages of using KLTs?,thread switching involves kernel,two mode switch required,ktl switching slower compared utl full process switch,,,,

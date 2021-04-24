@@ -15,11 +15,15 @@ def find_seconds(start, end):
 
 class Question():
 
+    def update(self, pat, i):
+        self.pattern.append(pat)
+
     def __init__(self, question, keywords):
         self.question = question
         self.keywords = keywords
         self.answer = ""
         self.flag = True
+        self.pattern = []
 
     def search(pattern, text, q):
         m = len(pattern)
@@ -44,7 +48,7 @@ class Question():
                         break
                 j += 1
                 if j == m:
-                    #print("position: " + str(i+1))
+                    self.update(j, i)
                     pass
             if i < n-m:
                 t = (d*(t-ord(text[i])*h) + ord(text[i+m])) % q
