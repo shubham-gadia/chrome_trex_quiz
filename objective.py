@@ -1,3 +1,4 @@
+#import all libraries
 import os
 import sys
 import pygame
@@ -12,8 +13,10 @@ from PyQt5.QtCore import QTimer, QTime
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
+#places the extra window outside the screen
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (-500, -500)
 
+#variables
 scr_size = (width,height) = (700,400)
 FPS = 60
 gravity = 0.6
@@ -245,7 +248,7 @@ class Cloud(pygame.sprite.Sprite):
         self.rect = self.rect.move(self.movement)
         if self.rect.right < 0:
             self.kill()
-'''
+
 class Scoreboard():
     def __init__(self,x=-1,y=-1):
         self.score = 0
@@ -271,7 +274,7 @@ class Scoreboard():
             self.image.blit(self.tempimages[s],self.temprect)
             self.temprect.left += self.temprect.width
         self.temprect.left = 0
-'''
+
 
 def jump(dino):
     dino.isJumping = True
@@ -300,7 +303,8 @@ def introscreen():
             return True
         else:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == pygame.quit():
+                    sys.exit()
                     return True
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE or event.key == pygame.K_UP:
@@ -336,8 +340,8 @@ def gameplay():
     global playerDino
     playerDino = Dino(44,47)
     new_ground = Ground(-1*gamespeed)
-    #scb = Scoreboard()
-    #highsc = Scoreboard(width*0.78)
+    scb = Scoreboard()
+    highsc = Scoreboard(width*0.78)
     counter = 0
 
     cacti = pygame.sprite.Group()
@@ -429,17 +433,17 @@ def gameplay():
             cacti.update()
             clouds.update()
             new_ground.update()
-            #scb.update(playerDino.score)
-            #highsc.update(high_score)
+            scb.update(playerDino.score)
+            highsc.update(high_score)
 
             if pygame.display.get_surface() != None:
                 screen.fill(background_col)
                 new_ground.draw()
                 clouds.draw(screen)
-                '''scb.draw()
+                scb.draw()
                 if high_score != 0:
                     highsc.draw()
-                    screen.blit(HI_image,HI_rect)'''
+                    screen.blit(HI_image,HI_rect)
                 cacti.draw(screen)
                 playerDino.draw()
 
