@@ -12,6 +12,7 @@ from PyQt5.QtCore import QTimer, QTime
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
+# This line will change the position of the window to -(500, -500) cordinates
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (-500, -500)
 
 scr_size = (width,height) = (700,400)
